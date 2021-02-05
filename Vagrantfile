@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
     config.vm.synced_folder ".", "/vagrant"
   end
   config.vm.define "cd" do |d|
-    d.vm.box = "ubuntu/trusty64"
+    d.vm.box = "ubuntu/xenial64"
     d.vm.hostname = "cd"
     d.vm.network "private_network", ip: "10.100.198.200"
     d.vm.provision :shell, path: "scripts/bootstrap_ansible.sh"
@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
     end
   end
   config.vm.define "prod" do |d|
-    d.vm.box = "ubuntu/trusty64"
+    d.vm.box = "ubuntu/xenial64"
     d.vm.hostname = "prod"
     d.vm.network "private_network", ip: "10.100.198.201"
     d.vm.provider "virtualbox" do |v|
@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
     end
   end
   config.vm.define "logging" do |d|
-    d.vm.box = "ubuntu/trusty64"
+    d.vm.box = "ubuntu/xenial64"
     d.vm.hostname = "logging"
     d.vm.network "private_network", ip: "10.100.198.202"
     d.vm.provider "virtualbox" do |v|
@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
   end
   (1..3).each do |i|
     config.vm.define "serv-disc-0#{i}" do |d|
-      d.vm.box = "ubuntu/trusty64"
+      d.vm.box = "ubuntu/xenial64"
       d.vm.hostname = "serv-disc-0#{i}"
       d.vm.network "private_network", ip: "10.100.194.20#{i}"
       d.vm.provider "virtualbox" do |v|
@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
     end
   end
   config.vm.define "proxy" do |d|
-    d.vm.box = "ubuntu/trusty64"
+    d.vm.box = "ubuntu/xenial64"
     d.vm.hostname = "proxy"
     d.vm.network "private_network", ip: "10.100.193.200"
     d.vm.provider "virtualbox" do |v|
