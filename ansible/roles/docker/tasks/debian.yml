@@ -32,9 +32,16 @@
   register: copy_result
   tags: [docker]
 
+- name: daemon files are present
+  template:
+    src: "{{ daemon }}"
+    dest: "{{ daemon_dest }}"
+  register: daemoncopy_result
+  tags: [docker]
+
 - name: Debian Daemon is reloaded
   command: systemctl daemon-reload
-  when: copy_result.changed and is_systemd is defined
+  when: (copy_result.changed or daemoncopy_result.changed) and is_systemd is defined
   tags: [docker]
 
 - name: vagrant user is added to the docker group
