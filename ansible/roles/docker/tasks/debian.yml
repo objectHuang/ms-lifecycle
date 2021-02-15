@@ -12,6 +12,13 @@
     force: yes
   tags: [docker]
 
+- name: Debian python3-pip is present
+  apt:
+    name: python3-pip
+    state: present
+    force: yes
+  tags: [docker]
+
 - name: Debian python-pip is present
   apt:
     name: python-pip
@@ -25,10 +32,15 @@
     state: present
   tags: [docker]
 
+- name: Debian docker systemd directory exist
+  file:
+    path: "{{ docker_option_dest }}"
+    state: directory
+
 - name: Debian files are present
   template:
-    src: "{{ docker_cfg }}"
-    dest: "{{ docker_cfg_dest }}"
+    src: "{{ docker_option }}"
+    dest: "{{ docker_option_dest }}"
   register: copy_result
   tags: [docker]
 
@@ -41,7 +53,7 @@
 
 - name: Debian Daemon is reloaded
   command: systemctl daemon-reload
-  when: (copy_result.changed or daemoncopy_result.changed) and is_systemd is defined
+  when: copy_result.changed or daemoncopy_result.changed
   tags: [docker]
 
 - name: vagrant user is added to the docker group
@@ -52,8 +64,6 @@
   tags: [docker]
 
 - name: Debian Docker service is restarted
-  service:
-    name: docker
-    state: restarted
+  command: systemctl restart docker
   when: copy_result.changed or user_result.changed
   tags: [docker]

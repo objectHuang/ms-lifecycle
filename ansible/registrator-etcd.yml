@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: etcd
   remote_user: vagrant
   serial: 1
   vars:

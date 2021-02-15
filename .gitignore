@@ -5,3 +5,4 @@
 /registry-mirror
 *.log
 *.retry
+.DS_Store
