@@ -19,3 +19,15 @@
   ignore_errors: yes
   with_items: "{{ obsolete_services }}"
   tags: [common]
+
+- name: Configure sshd
+  lineinfile:
+    path: "/etc/ssh/sshd_config"
+    regex: "^(#)?{{item.key}}"
+    line: "{{item.key}} {{item.value}}"
+    state: present
+  loop:
+    - { key: "PasswordAuthentication", value: "yes" } 
+  notify:
+    - restart sshd
+  tags: [common]
