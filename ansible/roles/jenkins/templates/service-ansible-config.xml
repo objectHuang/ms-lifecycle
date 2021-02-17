@@ -11,7 +11,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.1">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.7.3">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -43,14 +43,7 @@ ansible-playbook /vagrant/ansible/service.yml \
     --extra-vars &quot;repo_dir=${PWD} service_name={{ item.service_name }}&quot;</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers>
-    <hudson.plugins.logparser.LogParserPublisher plugin="log-parser@2.0">
-      <unstableOnWarning>false</unstableOnWarning>
-      <failBuildOnError>false</failBuildOnError>
-      <showGraphs>false</showGraphs>
-      <parsingRulesPath>/var/jenkins_home/parsing_rules</parsingRulesPath>
-      <useProjectRule>false</useProjectRule>
-    </hudson.plugins.logparser.LogParserPublisher>
+  <publishers>    
   </publishers>
   <buildWrappers/>
 </project>
