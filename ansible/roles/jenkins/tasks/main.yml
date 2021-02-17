@@ -18,7 +18,7 @@
   register: container_result
   tags: [jenkins]
 
-- pause: seconds=60
+- pause: seconds=30
   when: container_result.changed
   tags: [jenkins]
 
@@ -68,7 +68,7 @@
   when: configs_result.changed or plugins_result.changed
   tags: [jenkins]
 
-- pause: seconds=60
+- pause: seconds=45
   when: configs_result.changed or plugins_result.changed
   tags: [jenkins]
 
